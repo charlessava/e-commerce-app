@@ -1,0 +1,31 @@
+{
+  "name": "hospital-management-project",
+  "version": "1.0.0",
+  "description": "\"Hospital Management System API: A robust backend solution for managing hospital operations, patient records, staff, and services, built with Node.js and designed for scalability and reliability.\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "Hospital",
+    "Management",
+    "Patient",
+    "Records",
+    "Healthcare",
+    "API",
+    "Node.js",
+    "Medical",
+    "Management",
+    "System"
+  ],
+  "author": "Tochukwu Charles Ikechukwu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
