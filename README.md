@@ -1,6 +1,6 @@
-# 🛒 E-Commerce App (Milestone 1: Authentication & Product Catalog)
+# 🛒 E-Commerce App (Milestone 2: Authentication & Product Catalog)
 
-This is the first milestone of a full-stack E-Commerce application built with **Node.js**, **Express.js**, and **MongoDB**. The focus of this milestone is on **user/admin authentication**, **role-based access control**, and basic **product catalog management**.
+This is the second milestone of a full-stack E-Commerce application built with **Node.js**, **Express.js**, and **MongoDB**. The focus of this milestone is on **user/admin authentication**, **role-based access control**, and basic **product catalog management**.
 
 ---
 
