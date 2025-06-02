@@ -1,10 +1,13 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
-
 const dotenv = require("dotenv").config()
+
+
 const app = express()
 app.use(express.json())
+
+
 const User = require("./Models/User")
 const Category = require("./Models/Category")
 const Product = require("./Models/Product")
@@ -71,5 +74,62 @@ app.post("/sign-up", async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+// Login API endpoint
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // 1. Validate input
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Email and password are required' });
+        }
+
+        // 2. Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // 3. Compare passwords
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // 4. Generate JWT tokens
+        const accessToken = jwt.sign(
+            { userId: user._id },
+            process.env.ACCESSTOKEN,
+            { expiresIn: '1h' }
+        );
+
+        const refreshToken = jwt.sign(
+            { userId: user._id },
+            process.env.REFRESH_TOKEN,
+            { expiresIn: '7d' }
+        );
+
+        // 5. Send response (excluding sensitive data like password)
+        const { _id, userName, role } = user;
+
+        res.status(200).json({
+            message: "Login successful",
+            user: {
+                id: _id,
+                userName,
+                email,
+                role
+            },
+            accessToken,
+            refreshToken
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
