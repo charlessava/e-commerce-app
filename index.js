@@ -12,6 +12,8 @@ const User = require("./Models/User")
 const Category = require("./Models/Category")
 const Product = require("./Models/Product")
 const Order = require("./Models/Order")
+const authenticate = require("./Middlewares/index")
+
 
 
 
@@ -131,5 +133,42 @@ app.post('/login', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+//Role based access control
+
+app.post("/create-category", authenticate, async (req, res) => {
+    try {
+        const { name, description, parentCategory } = req.body;
+
+        // Validate inputs
+        if (!name || !description) {
+            return res.status(400).json({ message: "Name and description are required." });
+        }
+
+        // Check user role
+        if (req.user.role !== 'Admin') {
+            return res.status(403).json({ message: "Access denied. Admins only." });
+        }
+
+        // Create and save new category
+        const category = new Category({
+            name,
+            description,
+            parentCategory: parentCategory || null
+        });
+
+        await category.save();
+
+        res.status(201).json({
+            message: "Category created successfully",
+            category
+        });
+
+    } catch (error) {
+        console.error("Error creating category:", error.message);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 });
