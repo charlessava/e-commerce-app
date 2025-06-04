@@ -2,6 +2,8 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const dotenv = require("dotenv").config()
+const { authenticate, authorizeAdmin } = require("./Middlewares/index")
+
 
 
 const app = express()
@@ -12,7 +14,7 @@ const User = require("./Models/User")
 const Category = require("./Models/Category")
 const Product = require("./Models/Product")
 const Order = require("./Models/Order")
-const { authenticate } = require("./Middlewares/index")
+
 
 
 
@@ -137,10 +139,10 @@ app.post('/login', async (req, res) => {
 });
 
 
-//Role based access control- creating category by an admin
+//Role based access control
 
-
-app.post("/create-category", authenticate, async (req, res) => {
+// API to create category
+app.post("/create-category", authenticate, authorizeAdmin, async (req, res) => {
     try {
         const { name, description, parentCategory } = req.body;
 
@@ -186,3 +188,49 @@ app.post("/create-category", authenticate, async (req, res) => {
     }
 });
 
+// API to create product
+
+app.post("/create-product", authenticate, authorizeAdmin, async (req, res) => {
+    try {
+        const { name, price, category, inStock, stock } = req.body;
+
+        // Validate required fields
+        if (!name || !price || !category || inStock === undefined) {
+            return res.status(400).json({ message: "Name, price, category, and inStock are required." });
+        }
+
+
+
+        // Normalize name
+        const normalizedName = name.trim().toLowerCase();
+
+        // Check if product already exists (case-insensitive)
+        const existingProduct = await Product.findOne({
+            name: { $regex: new RegExp(`^${normalizedName}$`, 'i') }
+        });
+
+        if (existingProduct) {
+            return res.status(400).json({ message: "Product already exists." });
+        }
+
+        // Create and save product
+        const product = new Product({
+            name: normalizedName,
+            price,
+            category,
+            inStock,
+            stock: stock || 0
+        });
+
+        await product.save();
+
+        res.status(201).json({
+            message: "Product created successfully",
+            product
+        });
+
+    } catch (error) {
+        console.error("Error creating product:", error.message);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
