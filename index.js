@@ -12,7 +12,7 @@ const User = require("./Models/User")
 const Category = require("./Models/Category")
 const Product = require("./Models/Product")
 const Order = require("./Models/Order")
-const authenticate = require("./Middlewares/index")
+const { authenticate } = require("./Middlewares/index")
 
 
 
@@ -80,7 +80,7 @@ app.post("/sign-up", async (req, res) => {
 });
 
 
-// Login API endpoint
+// api to login
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -137,25 +137,38 @@ app.post('/login', async (req, res) => {
 });
 
 
-//Role based access control
+//Role based access control- creating category by an admin
+
 
 app.post("/create-category", authenticate, async (req, res) => {
     try {
         const { name, description, parentCategory } = req.body;
 
-        // Validate inputs
+        // Validate required fields
         if (!name || !description) {
             return res.status(400).json({ message: "Name and description are required." });
         }
 
-        // Check user role
+        // Admin access control
         if (req.user.role !== 'Admin') {
             return res.status(403).json({ message: "Access denied. Admins only." });
         }
 
+        // Normalize name
+        const normalizedName = name.trim().toLowerCase();
+
+        // Check if category already exists (case-insensitive)
+        const existingCategory = await Category.findOne({
+            name: { $regex: new RegExp(`^${normalizedName}$`, 'i') }
+        });
+
+        if (existingCategory) {
+            return res.status(400).json({ message: "Category already exists" });
+        }
+
         // Create and save new category
         const category = new Category({
-            name,
+            name: normalizedName,
             description,
             parentCategory: parentCategory || null
         });
@@ -172,3 +185,4 @@ app.post("/create-category", authenticate, async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+

@@ -11,7 +11,7 @@ const authenticate = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.ACCESSTOKEN);
-        req.user = decoded; // Ensure this includes userId and role
+        req.user = decoded; // To ensure this includes userId and role
         next();
     } catch (error) {
         return res.status(401).json({ message: "Invalid token" });
