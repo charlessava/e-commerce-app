@@ -16,9 +16,6 @@ const Product = require("./Models/Product")
 const Order = require("./Models/Order")
 
 
-
-
-
 port = process.env.PORT || 5000
 mongoDB_url = process.env.MONGODB_URL
 
