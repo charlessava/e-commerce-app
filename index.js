@@ -236,7 +236,7 @@ app.post("/create-product", authenticate, authorizeAdmin, async (req, res) => {
 
 app.get("/view-products",async (req, res)=>{
     try {
-        const product = await Product.find().populate("Category");
+        const product = await Product.find().populate("category");
         res.status(200).json({
             message:"these are the available products",
             product}
@@ -248,4 +248,24 @@ app.get("/view-products",async (req, res)=>{
 })
 
 
+// API TO VIEW A PRODUCT BY id
+app.get("/product/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Find product by ID and populate its category field
+        const product = await Product.findById(id).populate("category");
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        res.status(200).json({
+            message: "Product details retrieved successfully",
+            product,
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", error: error.message });
+    }
+});
 

@@ -15,7 +15,7 @@ const orderSchema = new mongoose.Schema({
         country: { type: String, required: true },
     },
     paymentMethod: { type: String, enum: ["cash", "card", "online"] }
-}, { timestamp: true })
+}, { timestamps: true })
 
 
 
