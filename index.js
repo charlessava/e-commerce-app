@@ -2,6 +2,8 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const dotenv = require("dotenv").config()
+const jwt = require("jsonwebtoken")
+
 const { authenticate, authorizeAdmin } = require("./Middlewares/index")
 
 
@@ -78,7 +80,6 @@ app.post("/sign-up", async (req, res) => {
     }
 });
 
-
 // api to login
 app.post('/login', async (req, res) => {
     try {
@@ -104,7 +105,7 @@ app.post('/login', async (req, res) => {
         // 4. Generate JWT tokens
         const accessToken = jwt.sign(
             { userId: user._id },
-            process.env.ACCESSTOKEN,
+            process.env.ACCESS_TOKEN,
             { expiresIn: '1h' }
         );
 
@@ -134,7 +135,6 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-
 
 //Role based access control
 
@@ -231,3 +231,21 @@ app.post("/create-product", authenticate, authorizeAdmin, async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
+// API TO VIEW ALL PRODUCTS
+
+app.get("/view-products",async (req, res)=>{
+    try {
+        const product = await Product.find().populate("Category");
+        res.status(200).json({
+            message:"these are the available products",
+            product}
+        )
+        
+    } catch (error) {
+        res.status(500).json({message:"Internal error", error})
+    }
+})
+
+
+

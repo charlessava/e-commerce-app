@@ -10,7 +10,7 @@ const authenticate = (req, res, next) => {
     const token = authHeader.split(" ")[1];
 
     try {
-        const decoded = jwt.verify(token, process.env.ACCESSTOKEN);
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN);
         req.user = decoded; // To ensure this includes userId and role
         next();
     } catch (error) {
