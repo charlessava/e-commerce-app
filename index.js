@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 
 app.post("/sign-up", async (req, res) => {
     try {
-        const { userName, email, password } = req.body;
+        const { userName, email, password, role } = req.body;
 
         // Validate input
         if (!userName) {
@@ -68,7 +68,7 @@ app.post("/sign-up", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 12);
 
         // Create new user
-        const newUser = new User({ userName, password: hashedPassword, email });
+        const newUser = new User({ userName, password: hashedPassword, email, role });
         await newUser.save();
 
         // Return success response
@@ -106,7 +106,7 @@ app.post('/login', async (req, res) => {
         const accessToken = jwt.sign(
             { userId: user._id },
             process.env.ACCESS_TOKEN,
-            { expiresIn: '1h' }
+            { expiresIn: '5d' }
         );
 
         const refreshToken = jwt.sign(
@@ -234,16 +234,17 @@ app.post("/create-product", authenticate, authorizeAdmin, async (req, res) => {
 
 // API TO VIEW ALL PRODUCTS
 
-app.get("/view-products",async (req, res)=>{
+app.get("/view-products", async (req, res) => {
     try {
         const product = await Product.find().populate("category");
         res.status(200).json({
-            message:"these are the available products",
-            product}
+            message: "these are the available products",
+            product
+        }
         )
-        
+
     } catch (error) {
-        res.status(500).json({message:"Internal error", error})
+        res.status(500).json({ message: "Internal error", error })
     }
 })
 
@@ -268,4 +269,45 @@ app.get("/product/:id", async (req, res) => {
         res.status(500).json({ message: "Internal server error", error: error.message });
     }
 });
+
+// API FOR REGISTERED USERS TO PLACE ORDERS
+
+app.post("/create-order", authenticate, async (req, res) => {
+    try {
+        const { items, shippingAddress, paymentMethod } = req.body;
+
+        if (!items || !Array.isArray(items) || items.length === 0) {
+            return res.status(400).json({ message: "Order must have at least one item." });
+        }
+
+        // Calculate total and validate items
+        let total = 0;
+        for (const item of items) {
+            const product = await Product.findById(item.product);
+            if (!product) {
+                return res.status(404).json({ message: `Product not found: ${item.product}` });
+            }
+            total += product.price * item.quantity;
+        }
+
+        // Create and save order
+        const order = new Order({
+            items,
+            total,
+            user: req.user._id,
+            shippingAddress,
+            paymentMethod,
+            status: "pending"
+        });
+
+        await order.save();
+
+        res.status(201).json({ message: "Order placed successfully", order });
+
+    } catch (error) {
+        console.error("Error placing order:", error);
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+});
+
 
