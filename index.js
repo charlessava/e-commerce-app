@@ -136,7 +136,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-//Role based access control
 
 // API to create category
 app.post("/create-category", authenticate, authorizeAdmin, async (req, res) => {
@@ -180,7 +179,7 @@ app.post("/create-category", authenticate, authorizeAdmin, async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Error creating category:", error.message);
+        console.error("Error creating category:", error.message, error.stack);
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
@@ -227,7 +226,7 @@ app.post("/create-product", authenticate, authorizeAdmin, async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Error creating product:", error.message);
+        console.error("Error creating product:", error.message, error.stack);
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
@@ -322,5 +321,17 @@ app.post("/create-order", authenticate, async (req, res) => {
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 });
+
+//API for users to view their past orders
+
+
+//Admin endpoint to view all orders
+
+app.get("/all-orders", authenticate, authorizeAdmin, async (req, res) => {
+    const orders = await Order.find().populate("user").populate("items.product");
+    res.json(orders);
+});
+
+
 
 
