@@ -104,13 +104,13 @@ app.post('/login', async (req, res) => {
 
         // 4. Generate JWT tokens
         const accessToken = jwt.sign(
-            { userId: user._id },
+            { userId: user._id, role: user.role },
             process.env.ACCESS_TOKEN,
             { expiresIn: '5d' }
         );
 
         const refreshToken = jwt.sign(
-            { userId: user._id },
+            { userId: user._id, },
             process.env.REFRESH_TOKEN,
             { expiresIn: '7d' }
         );
@@ -131,7 +131,7 @@ app.post('/login', async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
+        console.error("login error:", error.message, error.stack);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
@@ -150,7 +150,7 @@ app.post("/create-category", authenticate, authorizeAdmin, async (req, res) => {
 
         // Admin access control
         if (req.user.role !== 'Admin') {
-            return res.status(403).json({ message: "Access denied. Admins only." });
+            return res.status(403).json({ message: "Access denied. Administrators only." });
         }
 
         // Normalize name
@@ -280,17 +280,23 @@ app.post("/create-order", authenticate, async (req, res) => {
             return res.status(400).json({ message: "Order must have at least one item." });
         }
 
-        // Calculate total and validate items
         let total = 0;
+
         for (const item of items) {
             const product = await Product.findById(item.product);
+
             if (!product) {
                 return res.status(404).json({ message: `Product not found: ${item.product}` });
             }
+
+            if (item.quantity > product.stock) {
+                return res.status(400).json({ message: `Insufficient stock for product: ${product.name}` });
+            }
+
             total += product.price * item.quantity;
         }
 
-        // Create and save order
+        // Save order
         const order = new Order({
             items,
             total,
@@ -301,6 +307,13 @@ app.post("/create-order", authenticate, async (req, res) => {
         });
 
         await order.save();
+
+        // Decrease stock quantities
+        for (const item of items) {
+            const product = await Product.findById(item.product);
+            product.stock -= item.quantity;
+            await product.save();
+        }
 
         res.status(201).json({ message: "Order placed successfully", order });
 
