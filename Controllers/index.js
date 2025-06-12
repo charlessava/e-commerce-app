@@ -299,6 +299,7 @@ module.exports = {
     handleCreateProduct,
     handleViewProducts,
     handleViewOneProduct,
+    handleCreateOrders,
     handleMyOrders,
     handleAllOrders,
 }
