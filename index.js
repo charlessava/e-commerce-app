@@ -31,7 +31,7 @@ mongoose.connect(mongoDB_url)
     })
 
 app.get("/", (req, res) => {
-    return res.status(200).json({ message: "Welcome to 'BUYWISE' ecommerce app" })
+    return res.status(200).json({ message: "Welcome to your one choice e-commerce App 'FRESH MART' " })
 
 })
 
