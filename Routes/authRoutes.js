@@ -1,15 +1,19 @@
 const express = require("express")
 
-const router = express.router()
-const { authenticate, authorizeAdmin } = require("./Middlewares/index")
+const router = express.Router()
+const { authenticate, authorizeAdmin } = require("../Middlewares/index")
 
-const { handleLogin, handleSignup, handleCreateCategory, handleCreateProduct, handleViewProducts, handleViewOneProduct, handleCreateOrder, handleMyOrders, handleAllOrders } = require("./Controllers/index")
-
-
-const User = require("./Models/User")
-const Category = require("./Models/Category")
-const Product = require("./Models/Product")
-const Order = require("./Models/Order")
+const {
+    handleLogin, 
+    handleSignup, 
+    handleCreateCategory,
+    handleCreateProduct,
+    handleViewProducts, 
+    handleViewOneProduct,
+    handleCreateOrder,
+    handleMyOrders,
+    handleAllOrders
+} = require("../Controllers")
 
 //route to signup
 router.post("/sign-up", handleSignup);

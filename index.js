@@ -1,8 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose")
-const bcrypt = require("bcrypt")
 const dotenv = require("dotenv").config()
-const jwt = require("jsonwebtoken")
 const cors = require("cors")
 const routes = require("./Routes")
 
@@ -10,12 +8,12 @@ const routes = require("./Routes")
 const app = express()
 app.use(express.json())
 app.use(cors())
+app.use("/api", routes)
 
 
 
-
-port = process.env.PORT || 5000
-mongoDB_url = process.env.MONGODB_URL
+const port = process.env.PORT || 5000
+const mongoDB_url = process.env.MONGODB_URL
 
 
 
@@ -38,7 +36,7 @@ app.get("/", (req, res) => {
 
 
 
-app.use("/api", routes)
+
 
 
 

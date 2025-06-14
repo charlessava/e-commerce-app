@@ -1,4 +1,14 @@
 const express = require("express")
+const User = require("../Models/User")
+const Category = require("../Models/Category")
+const Product = require("../Models/Product")
+const Order = require("../Models/Order")
+
+
+const bcrypt = require("bcrypt")
+
+const jwt = require("jsonwebtoken")
+
 
 const handleSignup = async (req, res) => {
     try {
@@ -29,9 +39,12 @@ const handleSignup = async (req, res) => {
         const newUser = new User({ userName, password: hashedPassword, email, role });
         await newUser.save();
 
-        // Return success response
-        newUser.password = undefined; // exclude password field
-        res.status(201).json({ message: 'Account created successfully', newUser });
+        // Return success response without  visible password
+        const userData = newUser.toObject();
+        delete userData.password;
+
+        res.status(201).json({ message: 'Account created successfully', user: userData });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -142,11 +155,9 @@ const handleCreateProduct = async (req, res) => {
         const { name, price, category, inStock, stock } = req.body;
 
         // Validate required fields
-        if (!name || !price || !category || inStock === undefined) {
+        if (![name, price, category].every(Boolean) || inStock === undefined) {
             return res.status(400).json({ message: "Name, price, category, and inStock are required." });
         }
-
-
 
         // Normalize name
         const normalizedName = name.trim().toLowerCase();
@@ -299,7 +310,7 @@ module.exports = {
     handleCreateProduct,
     handleViewProducts,
     handleViewOneProduct,
-    handleCreateOrders,
+    handleCreateOrder,
     handleMyOrders,
     handleAllOrders,
 }
