@@ -55,42 +55,35 @@ Explore our API endpoints and test functionality via Postman:
 }
 ```
 
-# 🎯 **Milestone Progress**
+# 🎯 Milestone Progress
 
 ## ✅ Milestone 1: Authentication & Product Catalog
-  
-      - **User/Admin registration & login**
-      
-      - **Role-based access control**
-      
-      - **Category & Product schemas**
-      
-      - **Admin can create categories and products**
+- **User/Admin registration & login**
+- **Role-based access control**
+- **Category & Product schemas**
+- **Admin can create categories and products**
 
 ## ✅ Milestone 2: Product Browsing & Orders
-  
-      - **Users can browse products and view details**
-      
-      - **Place orders with multiple items**
-      
-      - **Create order schema with summary logic**
+- **Users can browse products and view details**
+- **Place orders with multiple items**
+- **Create order schema with summary logic**
 
 ## 🔄 Milestone 3: Order Management & Refinement
-  
-      - **View past orders**
-      
-      - **Add stock validation and update logic**
+- **View past orders**
+- **Add stock validation and update logic**
+
+---
 
 ## 🤝 Collaboration
 
-Interested in using FreshMart for your business or contributing to the project?
-
+Interested in using FreshMart for your business or contributing to the project?  
 Let’s connect and build something impactful together!
+
+---
 
 ## 📫 Contact
 
 For suggestions, collaborations, or integration inquiries:
 
-###📧 ikechukwutochukwu95@gmail.com
-
-###🔗 https://github.com/charlessava
+**📧 Email:** ikechukwutochukwu95@gmail.com  
+**🔗 GitHub:** [github.com/charlessava](https://github.com/charlessava)
