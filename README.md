@@ -1,62 +1,77 @@
-**🛒FreshMart – Supermarket E-Commerce  _"Revolutionizing Online Grocery Shopping"_**
+# **🛒FreshMart – Supermarket E-Commerce  _"Revolutionizing Online Grocery Shopping"_**
 
 FreshMart is a robust and scalable backend system for a supermarket e-commerce platform. It’s built to support seamless user and admin experiences, optimize product and order management, and enable high-performance online grocery operations.
 
-🚀 **Key Features**
+# 🚀 **Key Features**
 
-**- Authentication & Authorization**
+# **- Authentication & Authorization**
+
       Secure user/admin registration and login
       
       Role-based access control
       
-**- Product Catalog**
+# **- Product Catalog**
+
       Category and product management
       
       Full CRUD operations (Admin only)
-**- Product Browsing**
+      
+# **- Product Browsing**
+      
       View products by category
       
       Access detailed product information
-**Order Management**
+      
+# **Order Management**
+
       Place orders with multiple items
       
       Real-time order summary calculation
       
       Basic stock validation and update
-**- Order History**
+
+# **- Order History**
     Users can view their previous orders
 
-📖 **API Documentation**
+# 📖 **API Documentation**
 Access our API collection on Postman:  https://documenter.getpostman.com/view/44511516/2sB2x8Dqa9#6c092a20-e580-488f-8fb1-dd292410f86e
 
-🧰 **Technology Stack**
-Backend: Node.js + Express.js
+# 🧰 **Technology Stack**
 
-Database: MongoDB + Mongoose
+**Backend:** Node.js + Express.js
 
-Authentication: JWT + Bcrypt
+**Database:** MongoDB + Mongoose
 
-Environment Management: Dotenv
+**Authentication:** JWT + Bcrypt
 
-Other Tools: CORS
+**Environment Management:** Dotenv
 
-🧪 **Getting Started**
-Prerequisites
+**Other Tools:** CORS
+
+# 🧪 **Getting Started**
+
+**Prerequisites**
+
 Ensure you have Node.js and MongoDB installed locally.
 
-Setup Instructions
+**Setup Instructions**
 
 # 1. Clone the repository
+
 git clone https://github.com/charlessava/e-commerce-app
 
 # 2. Navigate into the project directory
+
 cd e-commerce-app
 
 # 3. Install dependencies
+
 npm install
 
 # 4. Create a .env file and configure your environment variables
+
 Example:
+
 **MONGODB_URI** = your_mongo_uri
 
 **JWT_SECRET** = your_secret_key
@@ -64,7 +79,7 @@ Example:
 # 5. Start the server
 npm run dev
 
-📦 **Installed Dependencies**
+# 📦 **Installed Dependencies**
   "bcrypt": "^6.0.0",
   
   "cors": "^2.8.5",
@@ -77,8 +92,10 @@ npm run dev
   
   "mongoose": "^8.15.1"
   
-🎯 **Milestone Progress**
-✅ **Milestone 1: Authentication & Product Catalog**
+#🎯 **Milestone Progress**
+
+# ✅ **Milestone 1: Authentication & Product Catalog**
+  
       - User/Admin registration & login
       
       - Role-based access control
@@ -87,23 +104,30 @@ npm run dev
       
       - Admin can create categories and products
 
-✅ **Milestone 2: Product Browsing & Orders**
+# ✅ **Milestone 2: Product Browsing & Orders**
+  
       - Users can browse products and view details
       
-      = Place orders with multiple items
+      - Place orders with multiple items
       
       - Create order schema with summary logic
 
-🔄 **Milestone 3: Order Management & Refinement**
+# 🔄 **Milestone 3: Order Management & Refinement**
+  
       - View past orders
       
       - Add stock validation and update logic
 
-🤝 **Collaboration**
+# 🤝 **Collaboration**
+
 Interested in using FreshMart for your business or contributing to the project?
+
 Let’s connect and build something impactful together!
 
-📫 **Contact**
+# 📫 **Contact**
+
 For suggestions, collaborations, or integration inquiries:
+
 📧 ikechukwutochukwu95@gmail.com
+
 🔗 https://github.com/charlessava
