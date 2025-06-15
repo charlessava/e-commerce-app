@@ -37,60 +37,51 @@ Ensure you have Node.js and MongoDB installed locally.
 Setup Instructions
 
 # 1. Clone the repository
-git clone https://github.com/your-username/freshmart-backend.git
+git clone https://github.com/charlessava/e-commerce-app
 
 # 2. Navigate into the project directory
-cd freshmart-backend
+cd e-commerce-app
 
 # 3. Install dependencies
 npm install
 
 # 4. Create a .env file and configure your environment variables
 Example:
-# MONGODB_URI=your_mongo_uri
-# JWT_SECRET=your_secret_key
+MONGODB_URI=your_mongo_uri
+JWT_SECRET=your_secret_key
 
 # 5. Start the server
 npm run dev
-📦 Installed Dependencies
-json
-Copy
-Edit
-{
+
+📦 **Installed Dependencies**
   "bcrypt": "^6.0.0",
   "cors": "^2.8.5",
   "dotenv": "^16.5.0",
   "express": "^5.1.0",
   "jsonwebtoken": "^9.0.2",
   "mongoose": "^8.15.1"
-}
-🎯 Milestone Progress
-✅ Milestone 1: Authentication & Product Catalog
-User/Admin registration & login
+  
+🎯 **Milestone Progress**
+✅ **Milestone 1: Authentication & Product Catalog**
+      - User/Admin registration & login
+      - Role-based access control
+      - Category & Product schemas
+      - Admin can create categories and products
 
-Role-based access control
+✅ **Milestone 2: Product Browsing & Orders**
+      - Users can browse products and view details
+      = Place orders with multiple items
+      - Create order schema with summary logic
 
-Category & Product schemas
+🔄 **Milestone 3: Order Management & Refinement**
+      - View past orders
+      - Add stock validation and update logic
 
-Admin can create categories and products
-
-✅ Milestone 2: Product Browsing & Orders
-Users can browse products and view details
-
-Place orders with multiple items
-
-Create order schema with summary logic
-
-🔄 Milestone 3: Order Management & Refinement
-View past orders
-
-Add stock validation and update logic
-
-🤝 Collaboration
+🤝 **Collaboration**
 Interested in using FreshMart for your business or contributing to the project?
 Let’s connect and build something impactful together!
 
-📫 Contact
+📫 **Contact**
 For suggestions, collaborations, or integration inquiries:
-📧 your.email@example.com
-🔗 [LinkedIn/GitHub/Portfolio Link]
+📧 ikechukwutochukwu95@gmail.com
+🔗 https://github.com/charlessava
