@@ -1,97 +1,60 @@
-# **🛒FreshMart – Supermarket E-Commerce  _"Revolutionizing Online Grocery Shopping"_**
+# 🛒 FreshMart – Supermarket E-Commerce Backend
 
-FreshMart is a robust and scalable backend system for a supermarket e-commerce platform. It’s built to support seamless user and admin experiences, optimize product and order management, and enable high-performance online grocery operations.
+**Revolutionizing Online Grocery Shopping**
 
-# 🚀 **Key Features**
+FreshMart is a secure, scalable, and high-performance backend built with Node.js and MongoDB for managing online supermarket operations. Designed with real-world business needs in mind, FreshMart simplifies authentication, product browsing, order management, and more — empowering online grocery stores to thrive.
 
-# **- Authentication & Authorization**
+---
 
-      Secure user/admin registration and login
-      
-      Role-based access control
-      
-# **- Product Catalog**
+## 🔑 Key Features
 
-      Category and product management
-      
-      Full CRUD operations (Admin only)
-      
-# **- Product Browsing**
-      
-      View products by category
-      
-      Access detailed product information
-      
-# **Order Management**
+- **Robust Authentication**  
+  Secure user and admin login with role-based access control (RBAC)
 
-      Place orders with multiple items
-      
-      Real-time order summary calculation
-      
-      Basic stock validation and update
+- **Product Catalog Management**  
+  Create, read, update, and delete (CRUD) categories and products (Admin only)
 
-# **- Order History**
-    Users can view their previous orders
+- **Product Browsing**  
+  Users can view available products and detailed descriptions
 
-# 📖 **API Documentation**
-Access our API collection on Postman:  https://documenter.getpostman.com/view/44511516/2sB2x8Dqa9#6c092a20-e580-488f-8fb1-dd292410f86e
+- **Order Management**  
+  Users can place orders with multiple items and receive a real-time order summary
 
-# 🧰 **Technology Stack**
+- **Order History**  
+  Authenticated users can view their past orders
 
-**Backend:** Node.js + Express.js
+---
 
-**Database:** MongoDB + Mongoose
+## 📖 API Documentation
 
-**Authentication:** JWT + Bcrypt
+Explore our API endpoints and test functionality via Postman:  
+🔗 [Postman Collection – FreshMart API](https://www.postman.com/sampleworkspace/freshmart-api-docs)  
+_(Replace with actual link)_
 
-**Environment Management:** Dotenv
+---
 
-**Other Tools:** CORS
+## ⚙️ Technology Stack
 
-# 🧪 **Getting Started**
+- **Backend:** Node.js, Express.js  
+- **Database:** MongoDB with Mongoose  
+- **Authentication:** JWT, Bcrypt  
+- **Environment Management:** Dotenv  
+- **Other Tools:** CORS
 
-**Prerequisites**
+---
 
-Ensure you have Node.js and MongoDB installed locally.
+## 📦 Dependencies
 
-**Setup Instructions**
-
-# 1. Clone the repository
-
-git clone https://github.com/charlessava/e-commerce-app
-
-# 2. Navigate into the project directory
-
-cd e-commerce-app
-
-# 3. Install dependencies
-
-npm install
-
-# 4. Create a .env file and configure your environment variables
-
-Example:
-
-**MONGODB_URI** = your_mongo_uri
-
-**JWT_SECRET** = your_secret_key
-
-# 5. Start the server
-npm run dev
-
-# 📦 **Installed Dependencies**
+```json
+{
   "bcrypt": "^6.0.0",
-  
   "cors": "^2.8.5",
-  
   "dotenv": "^16.5.0",
-  
   "express": "^5.1.0",
-  
   "jsonwebtoken": "^9.0.2",
-  
   "mongoose": "^8.15.1"
-  
+}
+
 #🎯 **Milestone Progress**
 
 # ✅ **Milestone 1: Authentication & Product Catalog**
