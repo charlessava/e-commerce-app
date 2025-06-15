@@ -25,9 +25,13 @@ Access our API collection on Postman:  https://documenter.getpostman.com/view/44
 
 🧰 **Technology Stack**
 Backend: Node.js + Express.js
+
 Database: MongoDB + Mongoose
+
 Authentication: JWT + Bcrypt
+
 Environment Management: Dotenv
+
 Other Tools: CORS
 
 🧪 **Getting Started**
